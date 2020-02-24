@@ -15,6 +15,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
+from sklearn.decomposition import PCA
 
 stopwords = corpus.stopwords.words("english")
 
@@ -92,7 +93,7 @@ def part2(X, n_dim):
 
 
 def reduce_dim(X,n=10):
-    svd = TruncatedSVD(n_components=n)
+    svd = PCA(n_components=n)
     X_dr = svd.fit_transform(X)
     return X_dr
 
