@@ -47,10 +47,14 @@ def part1(samples):
 
 def extract_features(samples):
     print("Extracting features ...")
+    #initialize word_index_map
     word_index_map = {}
     current_index = 0
+    #a list of all tokenized text
     all_tokens = []
+    #initialize index_word_map
     index_word_map = []
+    #iterate through all the texts, create word_index_map, all_tokens and index_word_map
     for text in samples:
         tokens = my_tokenizer(text)
         all_tokens.append(tokens)
@@ -61,6 +65,7 @@ def extract_features(samples):
                 index_word_map.append(token)
 
     def token_to_vector(tokens):
+        #convert tokenized text to vector
         x = np.zeros(len(word_index_map))
         for token in tokens:
             index = word_index_map[token]
@@ -69,8 +74,10 @@ def extract_features(samples):
 
     N = len(samples)
     D = len(word_index_map)
+    #create a matrix with number of texts rows and number of vocab columns
     X = np.zeros((N, D))
     i = 0
+    #fill the matrix row by row(text for text)
     for tokens in all_tokens:
         X[i, :] = token_to_vector(tokens)
         i += 1
